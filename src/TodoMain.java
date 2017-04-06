@@ -36,24 +36,17 @@ public class TodoMain {
           todoLines.remove(i);
           todoLines.add(i, "[x] " + args[1]);
           writeToFile(todoLines);
-        }
-      }
-    } else if (args[0].equals("-c")) {
-      for (int j = 0; j < todoLines.size(); j++) {
-        String tempName2 = todoLines.get(j);
-        if (tempName2.equals("[x] " + args[1])) {
-          todoLines.remove(j);
-          todoLines.add(j, "[ ] " + args[1]);
+        } else if (tempName.equals("[x] " + args[1])) {
+          todoLines.remove(i);
+          todoLines.add(i, "[ ] " + args[1]);
           writeToFile(todoLines);
         }
       }
-
     } else {
       System.out.println("ERROR : Unsupported argument , please type a valid argument.");
     }
     writeToFile(todoLines);
   }
-
   private static List<String> readLinesFromFile() {
     Path path = Paths.get(FILE_NAME);
     List<String> todoLines;
@@ -65,7 +58,6 @@ public class TodoMain {
     }
     return todoLines;
   }
-
   private static void writeToFile(List<String> data) {
     Path path = Paths.get(FILE_NAME);
     try {
