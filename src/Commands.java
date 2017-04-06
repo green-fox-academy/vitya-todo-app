@@ -1,6 +1,6 @@
 public class Commands {
 
-  public void printUsage() {
+  public static void printUsage() {
     System.out.println("Java Todo application\n" +
             "====================\n" +
             "\n" +
@@ -12,6 +12,10 @@ public class Commands {
 
 
   }
+
+  public String toFile() {
+     return "[]" + getClass().getName().toLowerCase() + ";"
+
 }
 
 
