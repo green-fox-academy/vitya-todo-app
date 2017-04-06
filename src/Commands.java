@@ -13,10 +13,10 @@ public class Commands {
 
   }
 
-  public String toFile() {
-    return "[]" + getClass().getName().toLowerCase() + ";";
-
-  }
+//  public String toFile() {
+//    return "[]" + getClass().getName().toLowerCase() + ";";
+//
+//  }
 }
 
 
