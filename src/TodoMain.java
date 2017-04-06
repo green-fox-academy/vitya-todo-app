@@ -13,31 +13,32 @@ public class TodoMain {
 
     if (args.length == 0) {
       Commands.printUsage();
-    }
-    else {
-      if (args[0].equals("-l") && todoLines.size() != 0) {
+
+    else if (args[0].equals("-l") && todoLines.size() != 0) {
         for (int i = 0; i < todoLines.size(); i++) {
           System.out.println(i + 1 + " - " + " " + todoLines.get(i));
+          writeToFile(todoLines);
         }
       } else if (args[0].equals("-l") && todoLines.size() == 0) {
-        System.out.println("No more todos for today, great job!");
-      }
-      if (args[0].equals("-a")) {
+        System.out.println("No todos for today! Enjoy your day! :)");
+        writeToFile(todoLines);
+      } else if (args[0].equals("-a")) {
         todoLines.add("[ ] " + args[1]);
-      }
-
-      if (args[0].equals("-r")) {
+        writeToFile(todoLines);
+      } else if (args[0].equals("-r")) {
         todoLines.remove(args[1]);
-      }
-
-      if (args[0].equals("-c")) {
+        writeToFile(todoLines);
+      } else if (args[0].equals("-c")) {
         todoLines.remove(args[1]);
         todoLines.add("[x] " + args[1]);
+        writeToFile(todoLines);
+      } else {
+        System.out.println("ERROR");
       }
 
-      writeToFile(todoLines);
     }
   }
+
 
   private static List<String> readLinesFromFile() {
     Path path = Paths.get(FILE_NAME);
