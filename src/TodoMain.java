@@ -23,13 +23,31 @@ public class TodoMain {
 
     } else if (args[0].equals("-a")) {
       todoLines.add("[ ] " + args[1]);
+      writeToFile(todoLines);
 
     } else if (args[0].equals("-r")) {
       todoLines.remove(Integer.parseInt(args[1]) - 1);
+      writeToFile(todoLines);
 
     } else if (args[0].equals("-c")) {
-      todoLines.remove(args[1]);
-      todoLines.add("[x] " + args[1]);
+      for (int i = 0; i < todoLines.size(); i++) {
+        String tempName = todoLines.get(i);
+        if (tempName.equals("[ ] " + args[1])) {
+          todoLines.remove(i);
+          todoLines.add(i, "[x] " + args[1]);
+          writeToFile(todoLines);
+        }
+      }
+    } else if (args[0].equals("-c")) {
+      for (int j = 0; j < todoLines.size(); j++) {
+        String tempName2 = todoLines.get(j);
+        if (tempName2.equals("[x] " + args[1])) {
+          todoLines.remove(j);
+          todoLines.add(j, "[ ] " + args[1]);
+          writeToFile(todoLines);
+        }
+      }
+
     } else {
       System.out.println("ERROR : Unsupported argument , please type a valid argument.");
     }
@@ -57,8 +75,3 @@ public class TodoMain {
     }
   }
 }
-
-
-
-
-
