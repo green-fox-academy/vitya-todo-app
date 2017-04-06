@@ -14,8 +14,9 @@ public class Commands {
   }
 
   public String toFile() {
-     return "[]" + getClass().getName().toLowerCase() + ";"
+    return "[]" + getClass().getName().toLowerCase() + ";";
 
+  }
 }
 
 

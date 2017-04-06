@@ -3,19 +3,44 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class TodoMain {
   private final static String FILE_NAME = "data.csv";
 
   public static void main(String[] args) {
-    Commands.printUsage();
+    List<String> todoLines = readLinesFromFile();
+    System.out.println(todoLines);
 
-    if (args[0].equals("-l") && args.length == 2) {
-      String type = args[1];
+    if (args.length == 0) {
+      Commands.printUsage();
+
+      if (args[0].equals("-l") && todoLines.size() != 0) {
+        for (int i = 0; i < todoLines.size(); i++) {
+          System.out.println(i + 1 + " - " + " " + todoLines.get(i));
+        }
+      } else if (args[0].equals("-l") && todoLines.size() == 0) {
+        System.out.println("No todos for today! Enjoy your day! :)");
+      }
+      if (args[0].equals("-a")) {
+        todoLines.add(args[1]);
+      }
+
+      writeToFile(todoLines);
     }
   }
-  
+    private static List<String> readLinesFromFile () {
+      Path path = Paths.get(FILE_NAME);
+      List<String> todoLines;
+      try {
+        todoLines = Files.readAllLines(path);
+      }catch(IOException e) {
+        e.printStackTrace();
+        todoLines = new ArrayList<>();
+      }
+      return todoLines;
+    }
 
   private static void writeToFile(List<String> data) {
     Path path = Paths.get(FILE_NAME);
@@ -25,19 +50,9 @@ public class TodoMain {
       e.printStackTrace();
     }
   }
-
-  private static List<String> readLinesFromFile() {
-    Path path = Paths.get(FILE_NAME);
-    List<String> rawLines;
-
-    try {
-      rawLines = Files.readAllLines(path);
-    } catch (IOException e) {
-      e.printStackTrace();
-      rawLines = new ArrayList<>();
-    }
-
-    return rawLines;
-  }
 }
-}
+
+
+
+
+
