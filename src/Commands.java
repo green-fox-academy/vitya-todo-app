@@ -1,5 +1,6 @@
 public class Commands {
 
+
   public static void printUsage() {
     System.out.println("Java Todo application\n" +
             "====================\n" +
