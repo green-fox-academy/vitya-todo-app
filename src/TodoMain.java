@@ -23,7 +23,7 @@ public class TodoMain {
       System.out.println("No todos for today! Enjoy your day! :)");
     }
     if (args[0].equals("-a")) {
-      todoLines.add(args[1]);
+      todoLines.add("[ ] " + args[1]);
     }
 
     if (args[0].equals("-r")) {
@@ -31,11 +31,12 @@ public class TodoMain {
     }
 
     if (args[0].equals("-c")){
-      todoLines.indexOf(args[1]) + "[ X ]";
+      todoLines.remove(args[1]);
+      todoLines.add("[x] " + args[1]);
     }
 
     writeToFile(todoLines);
-    System.out.println(todoLines);
+//    System.out.println(todoLines);
   }
 
   private static List<String> readLinesFromFile() {
