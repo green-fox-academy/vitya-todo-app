@@ -19,11 +19,14 @@ public class TodoMain {
         writeToFile(todoLines);
       }
     } else if (args[0].equals("-l") && todoLines.size() == 0) {
-      System.out.println("No todos for today! Enjoy your day! :)");
+      System.out.println("You have no todos yet.");
 
     } else if (args[0].equals("-a")) {
       todoLines.add("[ ] " + args[1]);
       writeToFile(todoLines);
+
+    } else if (args[0].equals("-a") && args[1].equals("")) {
+      System.out.println("ERROR : Unable to add: no task provided");
 
     } else if (args[0].equals("-r")) {
       todoLines.remove(Integer.parseInt(args[1]) - 1);
@@ -47,6 +50,7 @@ public class TodoMain {
     }
     writeToFile(todoLines);
   }
+
   private static List<String> readLinesFromFile() {
     Path path = Paths.get(FILE_NAME);
     List<String> todoLines;
@@ -58,6 +62,7 @@ public class TodoMain {
     }
     return todoLines;
   }
+
   private static void writeToFile(List<String> data) {
     Path path = Paths.get(FILE_NAME);
     try {
